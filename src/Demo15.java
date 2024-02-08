@@ -16,7 +16,6 @@ void main() {
     for (int i = 0; i < count; i++) {
 
 
-
 //            String studentDetail = data.substring(commaIndex);
 //
 //            int firstHyphenIndex = studentDetail.indexOf("-");
@@ -35,7 +34,7 @@ void main() {
 
             int firstHyphenIndex = studentDetail.indexOf("-");
             int lastHyphenIndex = studentDetail.lastIndexOf("-");
-            String id = String.format("S%03d" ,Integer.parseInt(studentDetail.substring(0, studentDetail.indexOf("-"))) ) ;
+            String id = String.format("S%03d" ,Integer.parseInt(studentDetail.substring(0, firstHyphenIndex)) ) ;
             String name = studentDetail.substring((firstHyphenIndex + 1), lastHyphenIndex);
             String address = studentDetail.substring(lastHyphenIndex + 1);
             commaIndex = data.indexOf(",", commaIndex) + 1;
