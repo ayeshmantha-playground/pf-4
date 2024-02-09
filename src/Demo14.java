@@ -7,33 +7,37 @@ void main() {
             250-Ruwani-Matara
             """;
 
-    int count = data.isBlank() ? 0 : data.length() - data.replace("," ,"").length() + 1;
+    int count = data.isBlank() ? 0 : data.length() - data.replace(",", "").length() + 1;
 
     int maxNameSize = 0, maxAddressSize = 0;
 
     String ids = "", names = "", addresses = "";
     int commaIndex = 0;
 
-    for (int i = 0; i < count ; i++) {
+    for (int i = 0; i < count; i++) {
 
-            String studentDetails = i == (count-1) ? data.substring(commaIndex):data.substring(commaIndex,data.indexOf(',',commaIndex));
-            commaIndex = data.indexOf(",",commaIndex )+1;
 
-            int firstHyphenIndex = studentDetails.indexOf('-');
-            int lastHyphenIndex = studentDetails.lastIndexOf('-');
+        String studentDetails = i == (count - 1) ? data.substring(commaIndex) : data.substring(commaIndex, data.indexOf(',', commaIndex));
+        commaIndex = data.indexOf(",", commaIndex) + 1;
 
-            String id =  String.format("S%03d",Integer.parseInt(studentDetails.substring(0,firstHyphenIndex).replace("\n",""))) ;
-            String name = studentDetails.substring(firstHyphenIndex + 1,lastHyphenIndex);
-            String address = studentDetails.substring(lastHyphenIndex + 1).replace("\n","");
+        int firstHyphenIndex = studentDetails.indexOf('-');
+        int lastHyphenIndex = studentDetails.lastIndexOf('-');
 
-            maxNameSize = maxNameSize < name.length() ? name.length() : maxNameSize;
-            maxAddressSize = maxAddressSize < address.length() ? address.length() : maxAddressSize;
+        String id = String.format("S%03d", Integer.parseInt(studentDetails.substring(0, firstHyphenIndex).replace("\n", "")));
+        String name = studentDetails.substring(firstHyphenIndex + 1, lastHyphenIndex);
+        String address = studentDetails.substring(lastHyphenIndex + 1).replace("\n", "");
 
-            ids += STR."\{id},";
-            names += STR."\{name},";
-            addresses += STR."\{address},";
+        maxNameSize = maxNameSize < name.length() ? name.length() : maxNameSize;
+        maxAddressSize = maxAddressSize < address.length() ? address.length() : maxAddressSize;
+
+        ids += STR."\{id},";
+        names += STR."\{name},";
+        addresses += STR."\{address},";
 
     }
+
+    maxNameSize = maxNameSize == 0 ? 10 : maxNameSize;
+    maxAddressSize = maxAddressSize == 0 ? 10 : maxAddressSize;
 
     System.out.println(ids);
     System.out.println(names);
@@ -43,9 +47,9 @@ void main() {
 
 
     System.out.println("+".concat("-".repeat(4)).concat("+").concat("-".repeat(maxNameSize)).concat("+").concat("-".repeat(maxAddressSize)).concat("+"));
-    System.out.printf("|%s"," ID |");
-    System.out.printf("%15s ","NAME |");
-    System.out.printf("%6s \n","ADDRESS|");
+    System.out.printf("|%s", " ID |");
+    System.out.printf("%15s ", "NAME |");
+    System.out.printf("%6s \n", "ADDRESS|");
     System.out.println("+".concat("-".repeat(4)).concat("+").concat("-".repeat(maxNameSize)).concat("+").concat("-".repeat(maxAddressSize)).concat("+"));
 
     int commaIndexId = 0;
@@ -53,13 +57,13 @@ void main() {
     int commandIndexAddress = 0;
     for (int j = 0; j < count; j++) {
 
-        System.out.printf("|%s",ids.substring(commaIndexId,ids.indexOf(",",commaIndexId)));
-        System.out.printf("|%s",names.substring(commaIndexName,names.indexOf(",",commaIndexName)));
-        System.out.printf("|%s \n",addresses.substring(commandIndexAddress,addresses.indexOf(",",commandIndexAddress))+"|");
+        System.out.printf("|%s", ids.substring(commaIndexId, ids.indexOf(",", commaIndexId)));
+        System.out.printf("|%s", names.substring(commaIndexName, names.indexOf(",", commaIndexName)));
+        System.out.printf("|%s \n", addresses.substring(commandIndexAddress, addresses.indexOf(",", commandIndexAddress)) + "|");
 
-        commaIndexId = ids.indexOf(",",commaIndex)+1;
-        commaIndexName = names.indexOf(",",commaIndexName)+1;
-        commandIndexAddress = addresses.indexOf(",",commandIndexAddress)+1;
+        commaIndexId = ids.indexOf(",", commaIndex) + 1;
+        commaIndexName = names.indexOf(",", commaIndexName) + 1;
+        commandIndexAddress = addresses.indexOf(",", commandIndexAddress) + 1;
     }
     System.out.println("+".concat("-".repeat(4)).concat("+").concat("-".repeat(maxNameSize)).concat("+").concat("-".repeat(maxAddressSize)).concat("+"));
 
