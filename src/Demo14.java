@@ -4,7 +4,8 @@ void main() {
             5-Kasun Sampath-Galle,
             2-Amil Shantha-Panadura,
             10-Pradeep Kumara-Kandy,
-            250-Ruwani-Matara
+            250-Ruwani-Matara,
+            12-Buddika Senavirathne-Ambalalngoda
             """;
 
     int count = data.isBlank() ? 0 : data.length() - data.replace(",", "").length() + 1;
@@ -63,7 +64,7 @@ void main() {
         System.out.printf(STR."|%-\{maxAddressSize}s", addresses.substring(commandIndexAddress, addresses.indexOf(",", commandIndexAddress)));
         System.out.print("|\n");
 
-        commaIndexId = ids.indexOf(",", commaIndex) + 1;
+        commaIndexId = ids.indexOf(",", commaIndexId) + 1;
         commaIndexName = names.indexOf(",", commaIndexName) + 1;
         commandIndexAddress = addresses.indexOf(",", commandIndexAddress) + 1;
     }
