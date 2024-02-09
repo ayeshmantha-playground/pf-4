@@ -36,8 +36,8 @@ void main() {
 
     }
 
-    maxNameSize = maxNameSize == 0 ? 10 : maxNameSize;
-    maxAddressSize = maxAddressSize == 0 ? 10 : maxAddressSize;
+    maxNameSize = maxNameSize == 0 ? 10 : maxNameSize + 2;
+    maxAddressSize = maxAddressSize == 0 ? 10 : maxAddressSize + 2;
 
     System.out.println(ids);
     System.out.println(names);
@@ -48,8 +48,9 @@ void main() {
 
     System.out.println("+".concat("-".repeat(4)).concat("+").concat("-".repeat(maxNameSize)).concat("+").concat("-".repeat(maxAddressSize)).concat("+"));
     System.out.printf("|%s", " ID |");
-    System.out.printf("%15s ", "NAME |");
-    System.out.printf("%6s \n", "ADDRESS|");
+    System.out.printf(STR."%-\{maxNameSize}s", "NAME");
+    System.out.printf(STR."|%-\{maxAddressSize}s", "ADDRESS");
+    System.out.print("|\n");
     System.out.println("+".concat("-".repeat(4)).concat("+").concat("-".repeat(maxNameSize)).concat("+").concat("-".repeat(maxAddressSize)).concat("+"));
 
     int commaIndexId = 0;
@@ -58,8 +59,9 @@ void main() {
     for (int j = 0; j < count; j++) {
 
         System.out.printf("|%s", ids.substring(commaIndexId, ids.indexOf(",", commaIndexId)));
-        System.out.printf("|%s", names.substring(commaIndexName, names.indexOf(",", commaIndexName)));
-        System.out.printf("|%s \n", addresses.substring(commandIndexAddress, addresses.indexOf(",", commandIndexAddress)) + "|");
+        System.out.printf(STR."|%-\{maxNameSize}s", names.substring(commaIndexName, names.indexOf(",", commaIndexName)));
+        System.out.printf(STR."|%-\{maxAddressSize}s", addresses.substring(commandIndexAddress, addresses.indexOf(",", commandIndexAddress)));
+        System.out.print("|\n");
 
         commaIndexId = ids.indexOf(",", commaIndex) + 1;
         commaIndexName = names.indexOf(",", commaIndexName) + 1;
