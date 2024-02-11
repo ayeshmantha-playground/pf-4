@@ -5,7 +5,7 @@ void main() {
             2-Amil Shantha-Panadura,
             10-Pradeep Kumara-Kandy,
             250-Ruwani-Matara,
-            12-Buddika Senavirathne-Ambalalngoda
+            12-Buddika Senavirathne-Ambalangoda
             """;
 
     int count = data.isBlank() ? 0 : data.length() - data.replace(",", "").length() + 1;
@@ -67,6 +67,13 @@ void main() {
         commaIndexId = ids.indexOf(",", commaIndexId) + 1;
         commaIndexName = names.indexOf(",", commaIndexName) + 1;
         commandIndexAddress = addresses.indexOf(",", commandIndexAddress) + 1;
+    }
+
+    if(count == 0){
+        System.out.printf("|%s", "    |");
+        System.out.printf(STR."%-\{maxNameSize}s", "");
+        System.out.printf(STR."|%-\{maxAddressSize}s", "");
+        System.out.print("|\n");
     }
     System.out.println("+".concat("-".repeat(4)).concat("+").concat("-".repeat(maxNameSize)).concat("+").concat("-".repeat(maxAddressSize)).concat("+"));
 
