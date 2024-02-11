@@ -5,6 +5,7 @@ void main() {
     final String RED = "\033[31m";
     final String BLUE = "\033[34m";
     final String RESET = "\033[0m";
+    final String GREEN = "\033[32m";
     final String CLEAR_SCREEN = "\033[H\033[2J";
 
     String allNames = "";
@@ -20,6 +21,7 @@ void main() {
     home:
     while (true) {
         System.out.println(CLEAR_SCREEN);
+        System.out.println(CLEAR_SCREEN);
         System.out.println("=============================================");
         System.out.println("        WELCOME TO STUDENT DB");
         System.out.println("=============================================");
@@ -32,8 +34,10 @@ void main() {
         System.out.print("Enter Your Command : ");
 
         switch (SCANNER.nextInt()) {
+
             case 1 -> {
                 System.out.println(CLEAR_SCREEN);
+
                 System.out.println("=============================================");
                 System.out.println("            ADD NEW STUDENT");
                 System.out.println("=============================================");
@@ -110,6 +114,10 @@ void main() {
 
                         switch (SCANNER.next()) {
                             case "Y" -> {
+                                System.out.println(CLEAR_SCREEN);
+                                System.out.println("=============================================");
+                                System.out.println("            ADD NEW STUDENT");
+                                System.out.println("=============================================");
                                 continue addStudent;
                             }
                             case "N" -> {
@@ -123,7 +131,6 @@ void main() {
 
                 }
 
-                //TODO : ADD NEW STUDENT;
             }
 
             case 2 -> {
@@ -134,7 +141,7 @@ void main() {
 
                 deleteStudent:
                 while (true) {
-                    System.out.print(STR."Enter Student ID (Enter \\{RED}\\\"H\\\"\\{RESET} to return home): ");
+                    System.out.print(STR."Enter Student ID (Enter \{RED}\"H\"\{RESET} to return home): ");
 
                     String deleteStudent = SCANNER.next();
 
@@ -245,6 +252,7 @@ void main() {
             }
 
             case 3 -> {
+                System.out.println(CLEAR_SCREEN);
                 System.out.println("=============================================");
                 System.out.println("                SEARCH STUDENT");
                 System.out.println("=============================================");
@@ -347,6 +355,10 @@ void main() {
 
             case 4 -> {
                 //System.out.println(STR."IDs: \{allIds}\nNames: \{allNames} \nMarksPF: \{allMarksPF} \nMarkOOP: \{allMarksOOP}");
+                System.out.println(CLEAR_SCREEN);
+                System.out.println("=============================================");
+                System.out.println("                ALL STUDENT DETAILS");
+                System.out.println("=============================================");
 
                 int nameWidth = 0;
                 int totalWidth = 6;
@@ -354,16 +366,34 @@ void main() {
 
                 numberOfStudent = allIds.length() - allIds.replace(",", "").length();
                 String findName = "";
+                String findMarksPf = "";
+                String findMarkOOP = "";
+
                 int commaIndexName = 0;
+                int commaIndexMarksPf = 0;
+                int commaIndexMarksOOP = 0;
+
+                int maxMarks = 0;
+                int minMarks = 200;
+
 
                 for (int i = 0; i < numberOfStudent; i++) {
                     findName = allNames.substring(commaIndexName, allNames.indexOf(',', commaIndexName));
+                    findMarksPf = allMarksPF.substring(commaIndexMarksPf, allMarksPF.indexOf(',', commaIndexMarksPf));
+                    findMarkOOP = allMarksOOP.substring(commaIndexMarksOOP, allMarksOOP.indexOf(',', commaIndexMarksOOP));
                     commaIndexName = allNames.indexOf(",", commaIndexName) + 1;
+                    commaIndexMarksPf = allMarksPF.indexOf(",", commaIndexMarksPf) + 1;
+                    commaIndexMarksOOP = allMarksOOP.indexOf(",", commaIndexMarksOOP) + 1;
+
+                    int total = Integer.parseInt(findMarksPf) + Integer.parseInt(findMarkOOP);
                     nameWidth = findName.length() > nameWidth ? findName.length() : nameWidth;
+                    maxMarks = total > maxMarks ? total : maxMarks;
+                    minMarks = total < minMarks ? total : minMarks;
+
                 }
 
                 String name = "";
-                System.out.println("+".concat("-".repeat(5)).concat("+").concat("-".repeat(nameWidth+2)).concat("+").concat("-".repeat(totalWidth)).concat("+").concat("-".repeat(averageWidth)).concat("+").concat("-".repeat(5)).concat("+"));
+                System.out.println("+".concat("-".repeat(5)).concat("+").concat("-".repeat(nameWidth + 2)).concat("+").concat("-".repeat(totalWidth)).concat("+").concat("-".repeat(averageWidth)).concat("+").concat("-".repeat(5)).concat("+"));
                 System.out.printf("|%-5s", " ID");
                 System.out.printf(STR."|%-\{nameWidth + 2}s", " NAME");
                 System.out.printf(STR."|%-\{totalWidth}s", " TOTAL");
@@ -373,14 +403,14 @@ void main() {
                 System.out.println("+".concat("-".repeat(5)).concat("+").concat("-".repeat(nameWidth + 2)).concat("+").concat("-".repeat(totalWidth)).concat("+").concat("-".repeat(averageWidth)).concat("+").concat("-".repeat(5)).concat("+"));
 
                 String findId = "";
-                String findMarksPf = "";
-                String findMarkOOP = "";
+
                 int commaIndexId = 0;
-                int commaIndexMarksPf = 0;
-                int commaIndexMarksOOP = 0;
+                commaIndexMarksOOP = 0;
+                commaIndexMarksPf = 0;
                 commaIndexName = 0;
-                int maxMarks = 0;
-                int minMarks = 200;
+
+//                findMarksPf = "";
+//                findMarkOOP = "";
 
                 for (int i = 0; i < numberOfStudent; i++) {
 
@@ -392,19 +422,61 @@ void main() {
                     double average = (Integer.parseInt(findMarksPf) + Integer.parseInt(findMarkOOP)) / 2.;
                     int total = Integer.parseInt(findMarksPf) + Integer.parseInt(findMarkOOP);
 
-                    maxMarks = total > maxMarks ? total : maxMarks;
-                    minMarks = total < minMarks ? total : minMarks;
+//                    maxMarks = total > maxMarks ? total : maxMarks;
+//                    minMarks = total < minMarks ? total : minMarks;
 
                     commaIndexId = allIds.indexOf(",", commaIndexId) + 1;
                     commaIndexName = allNames.indexOf(",", commaIndexName) + 1;
                     commaIndexMarksPf = allMarksPF.indexOf(",", commaIndexMarksPf) + 1;
                     commaIndexMarksOOP = allMarksOOP.indexOf(",", commaIndexMarksOOP) + 1;
 
-                    System.out.printf("|%-5s", STR." \{findId}");
-                    System.out.printf(STR."|%-\{nameWidth + 2}s", STR." \{findName}");
-                    System.out.printf(STR."|%-\{totalWidth}s", STR." \{total}");
-                    System.out.printf(STR."|%-\{averageWidth}s", STR." \{average}");
-                    System.out.printf("|%-5s", average >= 75 ? " A" : average >= 65 ? " B" : average >= 55 ? " C" : average >= 45 ? " S" : " F");
+                    String idOut = String.format("|%-5s",
+                            total == minMarks ?
+                                    STR."\{RED} \{findId}\{RESET}" :
+                                    total == maxMarks ?
+                                            STR."\{GREEN} \{findId}\{RESET}" :
+                                            STR." \{findId}");
+                    System.out.print(idOut);
+
+                    String nameOut = String.format(STR."|%-\{nameWidth + 2}s",
+                            total == minMarks ?
+                                    STR."\{RED} \{findName}\{RESET}" :
+                                    total == maxMarks ?
+                                            STR."\{GREEN} \{findName}\{RESET}" :
+                                            STR." \{findName}");
+                    System.out.print(nameOut);
+
+                    String totalOut = String.format(STR."|%-\{totalWidth}s",
+                            total == minMarks ?
+                                    STR."\{RED} \{total}\{RESET}" :
+                                    total == maxMarks ?
+                                            STR."\{GREEN} \{total}\{RESET}" :
+                                            STR." \{total}");
+                    System.out.print(totalOut);
+
+                    String avgOut = String.format(STR."|%-\{averageWidth}s",
+                            total == minMarks ?
+                                    STR."\{RED} \{average}\{RESET}" :
+                                    total == maxMarks ?
+                                            STR."\{GREEN} \{average}\{RESET}" :
+                                            STR." \{average}");
+                    System.out.print(avgOut);
+
+                    String grade = average >= 75 ? " A" : average >= 65 ? " B" : average >= 55 ? " C" : average >= 45 ? " S" : " F";
+
+                    String statOut = String.format("|%-5s",
+                            total == minMarks ?
+                                    STR."\{RED} \{grade}\{RESET}" :
+                                    total == maxMarks ?
+                                            STR."\{GREEN} \{grade}\{RESET}" :
+                                            STR." \{grade}");
+                    System.out.print(statOut);
+
+//                    System.out.printf(STR."|\{RED}%-5s\{RESET}", STR."\{RED} \{findId}\{RESET}");
+//                    System.out.printf(STR."|%-\{nameWidth + 2}s", STR." \{findName}");
+//                    System.out.printf(STR."|%-\{totalWidth}s", STR." \{total}");
+//                    System.out.printf(STR."|%-\{averageWidth}s", STR." \{average}");
+//                    System.out.printf("|%-5s", grade);
                     System.out.println("|");
 
                 }
@@ -426,9 +498,8 @@ void main() {
             }
 
             case 5 -> {
-                //TODO : EXIST
+                System.exit(0);
             }
-
             default -> {
                 System.out.println("Invalid Input");
             }
