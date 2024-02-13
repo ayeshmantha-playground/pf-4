@@ -1,6 +1,6 @@
 import java.util.SortedMap;
 
-void main(){
+void main() {
     String str1 = "This is a string";
     System.out.println(str1.toLowerCase());
     System.out.println(str1.toUpperCase());
